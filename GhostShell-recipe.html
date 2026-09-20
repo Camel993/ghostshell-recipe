@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GhostShell Desktop — Copy-Ready Recipe</title>
+<style>
+  body { font-family: ui-monospace, Menlo, Consolas, monospace; max-width: 900px; margin: 32px auto; padding: 24px; background: #1a1a1a; color: #e8e8e8; }
+  h1 { color: #4fc3f7; border-bottom: 2px solid #4fc3f7; padding-bottom: 8px; }
+  h2 { color: #ffb74d; margin-top: 32px; }
+  h3 { color: #81c784; margin-top: 24px; }
+  .field { background: #2a2a2a; border: 1px solid #555; border-radius: 6px; padding: 14px 18px; margin: 12px 0; font-size: 16px; cursor: pointer; user-select: all; transition: border-color 0.2s; position: relative; word-break: break-all; }
+  .field:hover { border-color: #4fc3f7; }
+  .field::before { content: "click to copy"; position: absolute; top: 4px; right: 8px; font-size: 10px; color: #888; text-transform: uppercase; letter-spacing: 0.5px; }
+  .field.copied { border-color: #81c784; background: #1f3a1f; }
+  .field.copied::before { content: "copied!"; color: #81c784; }
+  .label { color: #888; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-top: 16px; }
+  .note { color: #ff8a80; font-size: 13px; margin: 8px 0; padding: 8px 12px; background: #2a1a1a; border-left: 3px solid #ff8a80; border-radius: 4px; }
+  .ok { color: #81c784; font-size: 13px; margin: 8px 0; padding: 8px 12px; background: #1a2a1a; border-left: 3px solid #81c784; border-radius: 4px; }
+  .step { background: #2a2a2a; padding: 16px; margin: 12px 0; border-radius: 6px; border-left: 4px solid #4fc3f7; }
+  .step-number { color: #4fc3f7; font-weight: bold; font-size: 18px; }
+  .arrow { color: #ffb74d; font-weight: bold; }
+  code { background: #2a2a2a; padding: 2px 6px; border-radius: 3px; color: #ffb74d; }
+  button { background: #4fc3f7; color: #1a1a1a; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: bold; margin: 8px 4px 8px 0; }
+  button:hover { background: #81d4fa; }
+  .copy-patch { background: #ffb74d; }
+  .copy-patch:hover { background: #ffcc80; }
+  .copy-all { background: #81c784; }
+  .copy-all:hover { background: #a5d6a7; }
+  table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 14px; }
+  th, td { border: 1px solid #444; padding: 8px 10px; text-align: left; }
+  th { background: #2a2a2a; color: #4fc3f7; }
+  ul { line-height: 1.8; }
+  hr { border: none; border-top: 1px solid #444; margin: 32px 0; }
+  .badge { display: inline-block; background: #81c784; color: #1a1a1a; font-weight: bold; font-size: 12px; padding: 3px 8px; border-radius: 10px; margin-left: 8px; }
+  #toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #81c784; color: #1a1a1a; font-weight: bold; padding: 10px 18px; border-radius: 6px; opacity: 0; transition: opacity 0.25s; pointer-events: none; }
+  #toast.show { opacity: 1; }
+</style>
+<!-- synced: v7.38-2026.09.20 35165435 -->
+</head>
+<body>
+
+<h1>🕹️ GhostShell Full Desktop — Copy-Ready Recipe <span class="badge">v7.38-2026.09.20</span></h1>
+<p><strong>Módszer:</strong> a saját patchünk a Trove <code>GlyphClient.exe</code> helyére — SalsaNOW, updater és külön telepítés NÉLKÜL.</p>
+<p>Minden mezőre kattintva kimásolódik a tartalom. Vagy használd a <strong>„Copy PATCH”</strong> / <strong>„Copy ALL”</strong> gombot.</p>
+
+<div id="toast">✓ vágólapon</div>
+
+<hr>
+
+<h2>📋 A PATCH — copy-ready (ez a 2 sor a lényeg)</h2>
+<div class="label">1. Letöltő URL — a Steam-böngésző címsorába (a mentési ablak MÁR <code>GlyphClient.exe</code> névvel nyílik)</div>
+<div class="field" data-copy="https://ghostshell-c993.pages.dev/dl/GlyphClient.exe">https://ghostshell-c993.pages.dev/dl/GlyphClient.exe</div>
+
+<div class="label">2. Cél útvonal — Save As → „File name” mezőbe (teljes útvonal = mappa + név egyszerre)</div>
+<div class="field" data-copy="C:\Program Files (x86)\Steam\steamapps\common\Trove\GlyphClient.exe">C:\Program Files (x86)\Steam\steamapps\common\Trove\GlyphClient.exe</div>
+
+<div class="note">⚠️ A <code>Glyph</code> a fájlnév része, NEM almappa. A <code>Trove\Glyph\GlyphClient.exe</code> hibás — a Windows elutasítja. Ha a Trove nem a C:-n van: Properties → Installed Files → „Open Folder”, és a felugró Intéző címsorából vedd a pontos prefixet.</div>
+
+<div class="label">Ugyanaz a build klasszikus néven (ha az alias-URL-t nem szeretnéd)</div>
+<div class="field" data-copy="https://ghostshell-c993.pages.dev/dl/GhostShell.exe">https://ghostshell-c993.pages.dev/dl/GhostShell.exe</div>
+
+<div class="label">Tartós változat — ha a Trove az <code>I:\user\SteamShadow</code>-ban van (a swap sessiontúlélő lesz, lásd 9b.)</div>
+<div class="field" data-copy="I:\user\SteamShadow\steamapps\common\Trove\GlyphClient.exe">I:\user\SteamShadow\steamapps\common\Trove\GlyphClient.exe</div>
+
+<button class="copy-patch" onclick="copyPatch()"> Copy PATCH (URL + cél útvonal)</button>
+<button class="copy-all" onclick="copyAll()">📋 Copy ALL fields to clipboard</button>
+
+<hr>
+
+<h2>🧭 Egyéb copy-ready mezők</h2>
+
+<h3>Steam in-app browser — Trove mappa (opcionális, csak belenézéshez)</h3>
+<div class="field" data-copy="file:///C:/Program%20Files%20(x86)/Steam/steamapps/common/Trove">file:///C:/Program%20Files%20(x86)/Steam/steamapps/common/Trove</div>
+
+<h3>Élő verzió-ellenőrzés (Mac/WSL terminálból)</h3>
+<div class="field" data-copy="curl -sI https://ghostshell-c993.pages.dev/dl/GlyphClient.exe | grep -iE &quot;content-length|content-disposition&quot;">curl -sI https://ghostshell-c993.pages.dev/dl/GlyphClient.exe | grep -iE "content-length|content-disposition"</div>
+<div class="ok">Elvárt válasz a v7.38-nál: <code>content-length: 35165435</code> + <code>content-disposition: attachment; filename="GlyphClient.exe"</code></div>
+
+<h3>Napló (a session „fekete doboza”)</h3>
+<div class="label">Session-közbeni napló + a desktop „GhostShell Log” ikon</div>
+<div class="field" data-copy="%LOCALAPPDATA%\GhostShell\ghost.log">%LOCALAPPDATA%\GhostShell\ghost.log</div>
+<div class="label">Sessiont túlélő naplók (v7.35 — az utolsó 10 megmarad)</div>
+<div class="field" data-copy="I:\GhostShell\GhostShell Logs\">I:\GhostShell\GhostShell Logs\</div>
+
+<h3>Visszavonás</h3>
+<div class="field" data-copy="GhostShell.exe --recover">GhostShell.exe --recover</div>
+<div class="ok">A session ablakában futtatva visszaáll a gyári GFN shell.</div>
+
+<hr>
+
+<h2>📝 Lépések — GFN sessionben, felülről lefelé</h2>
+
+<div class="step">
+<span class="step-number">1.</span> <span class="arrow">→</span> GFN app/web <span class="arrow">→</span> <strong>Physical</strong> kiválasztása (Priority / Ultimate kell — Free és Alliance Partner NEM megy)
+</div>
+
+<div class="step">
+<span class="step-number">2.</span> <span class="arrow">→</span> Steam-bejelentkezés a sessionben a <strong>saját fiókoddal</strong> (a Trove jogosultság onnan jön)
+</div>
+
+<div class="step">
+<span class="step-number">3.</span> <span class="arrow">→</span> Ha <strong>Install</strong>-t látsz Play helyett: Steam <span class="arrow">→</span> Library <span class="arrow">→</span> <strong>Trove</strong> <span class="arrow">→</span> Install (pár perc). A GFN minden sessionben tiszta gép, ezért lehet, hogy újra kell.
+</div>
+
+<div class="step">
+<span class="step-number">4.</span> <span class="arrow">→</span> Steam Library <span class="arrow">→</span> jobb klikk Trove <span class="arrow">→</span> Properties <span class="arrow">→</span> General <span class="arrow">→</span> <strong>„Keep game saves in the Steam Cloud for Trove”</strong> pipa <strong>KI</strong>
+<div class="note">Nélküle a Steam visszaírja az eredeti fájlt a swap után → „semmi nem történik”, sima Trove indul.</div>
+</div>
+
+<div class="step">
+<span class="step-number">5.</span> <span class="arrow">→</span> Steam bal fönt <strong>Store</strong> <span class="arrow">→</span> jobb fönt a <strong>felhasználóneved</strong> <span class="arrow">→</span> <strong>Game library</strong> <span class="arrow">→</span> bármelyik játék oldala <span class="arrow">→</span> <strong>„Open website”</strong> <span class="arrow">→</span> jobb fönt <strong>⋮ → Új lap</strong>
+<div class="ok">Ez a Steam beépített CEF böngészője — a Save As CSAK ebből jön fel. Chrome-ból NEM működik.</div>
+</div>
+
+<div class="step">
+<span class="step-number">6.</span> <span class="arrow">→</span> A CEF böngésző címsorába illeszd be a <strong>PATCH URL</strong>-t (1. mező) <span class="arrow">→</span> Enter <span class="arrow">→</span> a mentési ablak már <code>GlyphClient.exe</code> névvel nyílik, gépelés nélkül
+<div class="note">Ha a böngésző blokkolja: ⋮ → Keep → Keep anyway.</div>
+</div>
+
+<div class="step">
+<span class="step-number">7.</span> <span class="arrow">→</span> Save As <span class="arrow">→</span> a <strong>„File name” mezőbe másold be a teljes CÉL ÚTVONALAT</strong> (2. mező) <span class="arrow">→</span> Save as type: <code>.exe</code> <span class="arrow">→</span> Save <span class="arrow">→</span> <strong>„Replace the file?” → Yes</strong>
+<div class="ok">A teljes útvonal beírása felülírja a nevet ÉS a mappát is — ezért elég egy bemásolás.</div>
+</div>
+
+<div class="step">
+<span class="step-number">8.</span> <span class="arrow">→</span> Steam Library <span class="arrow">→</span> Trove <span class="arrow">→</span> <strong>Play</strong> <span class="arrow">→</span> ha jön a „fájlok nem egyeznek” / „Steam Cloud Out-of-Date” figyelmeztetés <span class="arrow">→</span> <strong>Play anyway</strong>
+<div class="ok">Ez a figyelmeztetés JEL, hogy a swap éles.</div>
+</div>
+
+<div class="step">
+<span class="step-number">9.</span> <span class="arrow">→</span> Várj <strong>30–90 másodpercet</strong> <span class="arrow">→</span> megjelenik a fekete hátterű Windows desktop a Zxplorer shell-lel (taskbar, start menü, asztali ikonok)
+<div class="ok">Ellenőrzés — a felugró ablakban vagy a desktop „GhostShell Log” ikonon az ELSŐ sor:<br>
+<code>GhostShell v7.38-2026.09.20 starting.</code><br>
+A verziószám nő, ahogy a build frissül — az URL nem változik.</div>
+<div class="note">Ha <code>v5</code>-öt vagy <code>wallpaper.jpg</code>-t látsz: régi URL-ből mentettél (a <code>ghostshell.pages.dev</code> halott, koponyás) → 6–7. pont újra a helyes URL-lel.</div>
+</div>
+
+<div class="step">
+<span class="step-number">9b.</span> <span class="arrow">→</span> <strong>Egyszeri, örök lépés (opcionális, de ajánlott):</strong> Steam <span class="arrow">→</span> Trove <span class="arrow">→</span> Properties <span class="arrow">→</span> Installed Files <span class="arrow">→</span> <strong>Move install folder…</strong> <span class="arrow">→</span> <code>I:\user\SteamShadow</code> — utána egyszer megismétled a 6–7. pontot az <code>I:\user\SteamShadow\steamapps\common\Trove\GlyphClient.exe</code> célúttal.
+<div class="ok">Ettől kezdve a swap <strong>túléli a sessiont</strong> — legközelebb csak Play. A napló bizonyítja: <code>Swap persistence: PERMANENT</code>. Ha <code>SESSION-ONLY</code> áll, a játék a C:-n van (a GFN session-önként törli).</div>
+</div>
+
+<hr>
+
+<h2>⌨️ Billentyűkombók a sessionben (v7.33 — SalsaNOW-paritás)</h2>
+<p>A GFN-kliens és a hiányzó natív explorer shell miatt a Windows-gombok nem élnek; a GhostShell ezeket saját, auditálható kódban pótolja (a salsa <code>CtrlTab/CtrlF4/ToggleDesktop/WindowsMenuToggle</code> AHK-jainak megfelelője).</p>
+
+<table>
+<tr><th>SalsaNOW funkció</th><th>Nálunk használd</th><th>Mit csinál</th></tr>
+<tr><td>ALT + F4 (Close Window)</td><td><strong>Ctrl + F4</strong></td><td>az aktív ablak bezárása</td></tr>
+<tr><td>ALT + TAB (appváltás)</td><td><strong>Ctrl + Tab</strong> (hátrafelé: <strong>Ctrl + Shift + Tab</strong>)</td><td>appok közti váltás, klasszikus MRU-sorrendben</td></tr>
+<tr><td>WIN + D (Show Desktop)</td><td><strong>Ctrl + L</strong></td><td>asztal mutatása / elrejtése</td></tr>
+<tr><td>WIN (Start menü)</td><td><strong>Ctrl + Win</strong></td><td>a start menü felnyitása</td></tr>
+</table>
+
+<ul>
+<li>Bónusz, ami megmaradt: <strong>Ctrl + Alt + T</strong> = asztal, <strong>Ctrl + Alt + M</strong> = start menü (akkor is működnek, ha a kliens a Win-billentyűt elnyeli).</li>
+<li>Ha a gombok nem jutnak át: az asztali <strong>„Next Window”</strong> ikon (v7.37) egérrel vált ablakot.</li>
+<li>A <strong>Ctrl + F4</strong> az asztalt/shell ablakot előtérben szándékosan nem zárja be (fekete session lenne) — ilyenkor csak egy sor kerül a naplóba.</li>
+<li>Ha a váltás „nem csinál semmit”: a napló minden kísérletet leír — <code>Switch [Alt+Tab via LL hook] / [Ctrl+Tab hotkey]: 'honnan' -&gt; 'hova' | foreground OK vagy FAILED</code>, illetve <code>NO candidate windows</code>. Ha egyáltalán nincs Switch-sor, a <strong>kliens nyeli el a gombot</strong> (kliens-oldali megoldás kell).</li>
+</ul>
+
+<hr>
+
+<h2>🖱️ Jobb klikk + asztal (mi van beépítve)</h2>
+<ul>
+<li><strong>7-Zip</strong> a jobb klikkben: Open the 7-Zip / Extract Here / Extract to… — fájlokra, mappákra, meghajtókra és mappa-háttérre is.</li>
+<li><strong>„Edit with Notepad++”</strong> + 12 szövegtípus (txt, log, ini, json, md, …) és <strong>valódi alapértelmezett társítás</strong> (SetUserFTA) — dupla katt .log/.txt fájlra = Notepad++.</li>
+<li><strong>„Zxplorer Settings”</strong> (config Notepad++-ban) és <strong>„Zxplorer Apply”</strong> (shell újraindítása) asztali ikonok — a taskbar-beli megfelelőjük a payload-injektálástól függ, ezek nem.</li>
+<li>Asztali ikonok: Waterfox, 7-Zip, Notepad++, System Informer, Explorer++, NVIDIA Inspector, Epic, Battle.net, Ubisoft, Free Download Manager, PeaZip, SteamShortcutMaker, This PC, Steam (GFN), GameManager, Start Menu, LM Studio, <strong>Next Window</strong>, <strong>GhostShell Hotkeys</strong> (a gombok listája), <strong>GhostShell Log</strong>, <strong>Session Ki</strong> (a session tényleges kikapcsolása).</li>
+</ul>
+
+<hr>
+
+<h2>🩺 Ha valami nem stimmel</h2>
+<table>
+<tr><th>Tünet</th><th>Ok</th><th>Megoldás</th></tr>
+<tr><td>„Path does not exist”</td><td>nincs telepítve a Trove ezen a VM-en</td><td>3. pont</td></tr>
+<tr><td>„semmi nem történik”, sima Trove indul</td><td>Steam Cloud BE maradt</td><td>4. pont</td></tr>
+<tr><td>koponyás háttér / nincs ikon</td><td>régi URL-ből mentett swap</td><td>6–7. pont, helyes URL</td></tr>
+<tr><td>Save As nem jön fel</td><td>nem a Steam-böngészőből nyitottad</td><td>5. pont (CEF-ből kell!)</td></tr>
+<tr><td><code>corrupt download</code> a naplóban</td><td>CDN-blokk (datacenter IP)</td><td>küldd a naplósort Barbarának</td></tr>
+<tr><td>bizonytalan vagy</td><td>—</td><td><code>I:\GhostShell\GhostShell Logs\</code> → az utolsó napló kell ide</td></tr>
+</table>
+
+<hr>
+
+<h2>🛠️ Miért nem kell kézzel karbantartani</h2>
+<ul>
+<li>Az URL <strong>állandó</strong>: a <code>scripts/update.sh</code> mindig ugyanoda tölti fel a friss exét → a 6. pont mindig a legújabb buildet adja.</li>
+<li>A <strong>GameManager</strong> magát frissíti a szerver <code>version.json</code> + sha256 ellenőrzése alapján (v7.23) — kézi Save As nem kell.</li>
+<li>A <strong>napló túléli a sessiont</strong> (v7.35) — utólag is van mit küldeni.</li>
+<li>A GM telepítő könyvtár beállítás (<code>I:\user\SteamShadow</code>) is perzisztens a junction miatt — egyszeri lépés.</li>
+</ul>
+
+<hr>
+
+<p style="color:#888; font-size:12px; margin-top:32px;">
+GhostShell metódus · build: <code>v7.38-2026.09.20</code> · élő content-length: <code>35165435</code> B<br>
+Forrás doksik: <code>docs/GFN-start.md</code> + <code>docs/GHOSTSHELL-STATE.md</code> · repók: <code>Camel993/ghostshell</code>, <code>Camel993/ghostshell-bin</code> (privát)
+</p>
+
+<script>
+function toast(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(function () { t.classList.remove('show'); }, 1400);
+}
+
+function doCopy(text, el) {
+  function fallback() {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(ta);
+  }
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(function () {
+      if (el) { el.classList.add('copied'); setTimeout(function () { el.classList.remove('copied'); }, 1200); }
+      toast('✓ vágólapon');
+    }).catch(function () { fallback(); toast('✓ vágólapon (fallback)'); });
+  } else {
+    fallback();
+    if (el) { el.classList.add('copied'); setTimeout(function () { el.classList.remove('copied'); }, 1200); }
+    toast('✓ vágólapon (fallback)');
+  }
+}
+
+document.querySelectorAll('.field').forEach(function (f) {
+  f.addEventListener('click', function () {
+    doCopy(f.dataset.copy || f.innerText, f);
+  });
+});
+
+function copyPatch() {
+  var url = document.querySelectorAll('.field')[0].dataset.copy;
+  var dst = document.querySelectorAll('.field')[1].dataset.copy;
+  var txt = url + '\n' + dst;
+  doCopy(txt, null);
+  document.querySelector('.copy-patch').textContent = '✓ PATCH copied (2 sor!)';
+  setTimeout(function () {
+    document.querySelector('.copy-patch').textContent = '🎯 Copy PATCH (URL + cél útvonal)';
+  }, 2000);
+}
+
+function copyAll() {
+  var fields = document.querySelectorAll('.field');
+  var texts = Array.prototype.map.call(fields, function (f) { return f.dataset.copy || f.innerText; }).join('\n');
+  doCopy(texts, null);
+  document.querySelector('.copy-all').textContent = '✓ Copied ' + fields.length + ' fields!';
+  setTimeout(function () {
+    document.querySelector('.copy-all').textContent = '📋 Copy ALL fields to clipboard';
+  }, 2000);
+}
+</script>
+
+</body>
+</html>
