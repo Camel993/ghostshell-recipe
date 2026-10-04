@@ -36,12 +36,12 @@
   #toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #81c784; color: #1a1a1a; font-weight: bold; padding: 10px 18px; border-radius: 6px; opacity: 0; transition: opacity 0.25s; pointer-events: none; }
   #toast.show { opacity: 1; }
 </style>
-<!-- synced: v7.44-2026.09.24 35178863 -->
+<!-- synced: v7.45-2026.09.24 35179760 -->
 </head>
 <body>
 
-<h1>🕹️ GhostShell Full Desktop — Copy-Ready Recipe <span class="badge">v7.44-2026.09.24</span></h1>
-<p><strong>Módszer:</strong> a saját patchünk a Trove <code>GlyphClient.exe</code> helyére — SalsaNOW, updater és külön telepítés NÉLKÜL.</p>
+<h1>🕹️ GhostShell Full Desktop — Copy-Ready Recipe <span class="badge">v7.45-2026.09.24</span></h1>
+<p><strong>Módszer:</strong> a saját patchünk bármelyik <strong>Install-to-Play</strong> játék exe-jének helyére — itt a <strong>Color Connect</strong>-é. Trove FÖLÖTT, SalsaNOW/updater/külön telepítés NÉLKÜL.</p>
 <p><strong>Ez a panel bárhonnan megnyitható:</strong> <code>https://camel993.github.io/ghostshell-recipe/</code> — a GFN session böngészőjében is (onnan egy kattintással másolható minden mező).</p>
 <p>Minden mezőre kattintva kimásolódik a tartalom. Vagy használd a <strong>„Copy PATCH”</strong> / <strong>„Copy ALL”</strong> gombot.</p>
 
@@ -50,19 +50,28 @@
 <hr>
 
 <h2>📋 A PATCH — copy-ready (ez a 2 sor a lényeg)</h2>
-<div class="label">1. Letöltő URL — a Steam-böngésző címsorába (a mentési ablak MÁR <code>GlyphClient.exe</code> névvel nyílik)</div>
-<div class="field" data-copy="https://ghostshell-c993.pages.dev/dl/GlyphClient.exe">https://ghostshell-c993.pages.dev/dl/GlyphClient.exe</div>
+<div class="label">1. Letöltő URL — a Steam-böngésző címsorába</div>
+<div class="field" id="patchUrl" data-copy="https://ghostshell-c993.pages.dev/dl/Color.Connect.exe">https://ghostshell-c993.pages.dev/dl/Color.Connect.exe</div>
+<div class="note">Ebben az <strong>alias-</strong> URL-ben a szóköz <strong>ponttal</strong> jelenik meg (<code>Color.Connect.exe</code>), mert a GitHub release így tárolja az assetet. <strong>A mentési ablakban a fájlnév <code>Color.Connect.exe</code> lesz — DE ez nem számít</strong>, mert a 7. pontban a teljes útvonalat másolod be a „File name” mezőbe, ami felülírja a nevet. Ha nem bízol az aliasban: másold be a <code>GhostShell.exe</code> URL-t (lejjebb) — ugyanaz a build.</div>
 
 <div class="label">2. Cél útvonal — Save As → „File name” mezőbe (teljes útvonal = mappa + név egyszerre)</div>
-<div class="field" data-copy="C:\Program Files (x86)\Steam\steamapps\common\Trove\GlyphClient.exe">C:\Program Files (x86)\Steam\steamapps\common\Trove\GlyphClient.exe</div>
+<div class="field" id="patchPath" data-copy="C:\Program Files (x86)\Steam\steamapps\common\Color Connect\Color Connect.exe">C:\Program Files (x86)\Steam\steamapps\common\Color Connect\Color Connect.exe</div>
 
-<div class="note">⚠️ A <code>Glyph</code> a fájlnév része, NEM almappa. A <code>Trove\Glyph\GlyphClient.exe</code> hibás — a Windows elutasítja. Ha a Trove nem a C:-n van: Properties → Installed Files → „Open Folder”, és a felugró Intéző címsorából vedd a pontos prefixet.</div>
+<div class="note">⚠️ A <strong>Color Connect</strong>-nél a mappa- és a fájlnév is szóközt tartalmaz — a mappa <code>Color Connect</code>, a fájl <code>Color Connect.exe</code>. A <code>Steam\steamapps\common\Color\Connect.exe</code> hibás. Ha a játék nem a C:-n van: Properties → Installed Files → „Open Folder”, és a felugró Intéző címsorából vedd a pontos prefixet.</div>
+
+<h3>További alias-ok — ha nem a Color Connectet patch-eled</h3>
+<div class="label">Ha másik Install-to-Play játékot választasz (bármelyik működik), az <strong>exe neve</strong> a játéké. Ezek a letöltő-URL-ek készen állnak:</div>
+<div class="field" data-copy="https://ghostshell-c993.pages.dev/dl/GlyphClient.exe">https://ghostshell-c993.pages.dev/dl/GlyphClient.exe</div>
+<div class="field" data-copy="https://ghostshell-c993.pages.dev/dl/Different.Strokes.exe">https://ghostshell-c993.pages.dev/dl/Different.Strokes.exe</div>
+<div class="field" data-copy="https://ghostshell-c993.pages.dev/dl/Deep.the.Game.exe">https://ghostshell-c993.pages.dev/dl/Deep.the.Game.exe</div>
+<div class="note">Mindegyik <strong>ugyanaz az egyetlen GhostShell build</strong> — csak más fájlnéven jön le. A 2. mezőt (cél útvonalat) írd át a saját játékodra.</div>
 
 <div class="label">Ugyanaz a build klasszikus néven (ha az alias-URL-t nem szeretnéd)</div>
 <div class="field" data-copy="https://ghostshell-c993.pages.dev/dl/GhostShell.exe">https://ghostshell-c993.pages.dev/dl/GhostShell.exe</div>
+<div class="label">A <strong>régi, Trove-os alias</strong> — csak emlékeztető, NEM ezt használd (a Trove-ot törölték a GFN-ből 2026-10-01-én; a módszer nem játék-specifikus)</div>
 
-<div class="label">Tartós változat — ha a Trove az <code>I:\user\SteamShadow</code>-ban van (a swap sessiontúlélő lesz, lásd 9b.)</div>
-<div class="field" data-copy="I:\user\SteamShadow\steamapps\common\Trove\GlyphClient.exe">I:\user\SteamShadow\steamapps\common\Trove\GlyphClient.exe</div>
+<div class="label">Tartós változat — ha a játék az <code>I:\user\SteamShadow</code>-ban van (a swap sessiontúlélő lesz, lásd 9b.)</div>
+<div class="field" data-copy="I:\user\SteamShadow\steamapps\common\Color Connect\Color Connect.exe">I:\user\SteamShadow\steamapps\common\Color Connect\Color Connect.exe</div>
 
 <button class="copy-patch" onclick="copyPatch()"> Copy PATCH (URL + cél útvonal)</button>
 <button class="copy-all" onclick="copyAll()">📋 Copy ALL fields to clipboard</button>
@@ -74,12 +83,12 @@
 <h3>A panel nyilvános címe (megosztható / bárhonnan nyitható)</h3>
 <div class="field" data-copy="https://camel993.github.io/ghostshell-recipe/">https://camel993.github.io/ghostshell-recipe/</div>
 
-<h3>Steam in-app browser — Trove mappa (opcionális, csak belenézéshez)</h3>
-<div class="field" data-copy="file:///C:/Program%20Files%20(x86)/Steam/steamapps/common/Trove">file:///C:/Program%20Files%20(x86)/Steam/steamapps/common/Trove</div>
+<h3>Steam in-app browser — Color Connect mappa (opcionális, csak belenézéshez)</h3>
+<div class="field" data-copy="file:///C:/Program%20Files%20(x86)/Steam/steamapps/common/Color%20Connect">file:///C:/Program%20Files%20(x86)/Steam/steamapps/common/Color%20Connect</div>
 
 <h3>Élő verzió-ellenőrzés (Mac/WSL terminálból)</h3>
-<div class="field" data-copy="curl -sI https://ghostshell-c993.pages.dev/dl/GlyphClient.exe | grep -iE &quot;content-length|content-disposition&quot;">curl -sI https://ghostshell-c993.pages.dev/dl/GlyphClient.exe | grep -iE "content-length|content-disposition"</div>
-<div class="ok">Elvárt válasz a v7.38-nál: <code>content-length: 35178863</code> + <code>content-disposition: attachment; filename="GlyphClient.exe"</code></div>
+<div class="field" data-copy="curl -sI https://ghostshell-c993.pages.dev/dl/Color.Connect.exe | grep -iE &quot;content-length|content-disposition&quot;">curl -sI https://ghostshell-c993.pages.dev/dl/Color.Connect.exe | grep -iE "content-length|content-disposition"</div>
+<div class="ok">Elvárt válasz: <code>HTTP/2 200</code> + <code>content-length: <span id="liveSize">35179760</span></code> + <code>content-disposition: attachment; filename="Color.Connect.exe"</code></div>
 
 <h3>Napló (a session „fekete doboza”)</h3>
 <div class="label">Session-közbeni napló + a desktop „GhostShell Log” ikon</div>
@@ -100,16 +109,16 @@
 </div>
 
 <div class="step">
-<span class="step-number">2.</span> <span class="arrow">→</span> Steam-bejelentkezés a sessionben a <strong>saját fiókoddal</strong> (a Trove jogosultság onnan jön)
+<span class="step-number">2.</span> <span class="arrow">→</span> Steam-bejelentkezés a sessionben a <strong>saját fiókoddal</strong> (a játékok jogosultsága onnan jön)
 </div>
 
 <div class="step">
-<span class="step-number">3.</span> <span class="arrow">→</span> Ha <strong>Install</strong>-t látsz Play helyett: Steam <span class="arrow">→</span> Library <span class="arrow">→</span> <strong>Trove</strong> <span class="arrow">→</span> Install (pár perc). A GFN minden sessionben tiszta gép, ezért lehet, hogy újra kell.
+<span class="step-number">3.</span> <span class="arrow">→</span> Steam Library <span class="arrow">→</span> bal fönt a szűrőnél válaszd az <strong>„Install-to-Play”</strong> opciót (NEM a Ready-to-Play-t!) <span class="arrow">→</span> keresés: <strong>Color Connect</strong> <span class="arrow">→</span> játék <span class="arrow">→</span> <strong>Install</strong> (pár perc). A GFN minden session tiszta gép, ezért lehet, hogy újra kell.
 </div>
 
 <div class="step">
-<span class="step-number">4.</span> <span class="arrow">→</span> Steam Library <span class="arrow">→</span> jobb klikk Trove <span class="arrow">→</span> Properties <span class="arrow">→</span> General <span class="arrow">→</span> <strong>„Keep game saves in the Steam Cloud for Trove”</strong> pipa <strong>KI</strong>
-<div class="note">Nélküle a Steam visszaírja az eredeti fájlt a swap után → „semmi nem történik”, sima Trove indul.</div>
+<span class="step-number">4.</span> <span class="arrow">→</span> Steam Library <span class="arrow">→</span> jobb klikk <strong>Color Connect</strong> <span class="arrow">→</span> Properties <span class="arrow">→</span> General <span class="arrow">→</span> a <strong>„Keep game saves in the Steam Cloud for Color Connect”</strong> pipa <strong>KI</strong>
+<div class="note">Nélküle a Steam visszaírja az eredeti exe-t a swap után → „semmi nem történik”, sima Color Connect indul. <strong>A videó ezt a lépést nem mutatja, de a logika ugyanaz</strong> — ha a swap nem fog, először itt nézz körül.</div>
 </div>
 
 <div class="step">
@@ -118,30 +127,30 @@
 </div>
 
 <div class="step">
-<span class="step-number">6.</span> <span class="arrow">→</span> A CEF böngésző címsorába illeszd be a <strong>PATCH URL</strong>-t (1. mező) <span class="arrow">→</span> Enter <span class="arrow">→</span> a mentési ablak már <code>GlyphClient.exe</code> névvel nyílik, gépelés nélkül
+<span class="step-number">6.</span> <span class="arrow">→</span> A CEF böngésző címsorába illeszd be a <strong>PATCH URL</strong>-t (1. mező) <span class="arrow">→</span> Enter <span class="arrow">→</span> a mentési ablak már <code>Color Connect.exe</code> névvel nyílik, gépelés nélkül
 <div class="note">Ha a böngésző blokkolja: ⋮ → Keep → Keep anyway.</div>
 </div>
 
 <div class="step">
 <span class="step-number">7.</span> <span class="arrow">→</span> Save As <span class="arrow">→</span> a <strong>„File name” mezőbe másold be a teljes CÉL ÚTVONALAT</strong> (2. mező) <span class="arrow">→</span> Save as type: <code>.exe</code> <span class="arrow">→</span> Save <span class="arrow">→</span> <strong>„Replace the file?” → Yes</strong>
-<div class="ok">A teljes útvonal beírása felülírja a nevet ÉS a mappát is — ezért elég egy bemásolás.</div>
+<div class="ok"><strong>Ez a lépés a garancia.</strong> A teljes útvonal beírása felülírja a fájlnevet ÉS a mappát is — ezért a Save As ablakban látott név (alias esetén <code>Color.Connect.exe</code>) <strong>teljesen mindegy</strong>, nem kell átírni. A szóközös célútvonalat viszont pontosan be kell illeszteni.</div>
 </div>
 
 <div class="step">
-<span class="step-number">8.</span> <span class="arrow">→</span> Steam Library <span class="arrow">→</span> Trove <span class="arrow">→</span> <strong>Play</strong> <span class="arrow">→</span> ha jön a „fájlok nem egyeznek” / „Steam Cloud Out-of-Date” figyelmeztetés <span class="arrow">→</span> <strong>Play anyway</strong>
+<span class="step-number">8.</span> <span class="arrow">→</span> Steam Library <span class="arrow">→</span> <strong>Color Connect</strong> <span class="arrow">→</span> <strong>Play</strong> <span class="arrow">→</span> ha jön a „fájlok nem egyeznek” / „Verify integrity of game files” figyelmeztetés <span class="arrow">→</span> <strong>Play anyway</strong>
 <div class="ok">Ez a figyelmeztetés JEL, hogy a swap éles.</div>
 </div>
 
 <div class="step">
 <span class="step-number">9.</span> <span class="arrow">→</span> Várj <strong>30–90 másodpercet</strong> <span class="arrow">→</span> megjelenik a fekete hátterű Windows desktop a Zxplorer shell-lel (taskbar, start menü, asztali ikonok)
 <div class="ok">Ellenőrzés — a felugró ablakban vagy a desktop „GhostShell Log” ikonon az ELSŐ sor:<br>
-<code>GhostShell v7.44-2026.09.24 starting.</code><br>
+<code>GhostShell v7.45-2026.09.24 starting.</code><br>
 A verziószám nő, ahogy a build frissül — az URL nem változik.</div>
 <div class="note">Ha <code>v5</code>-öt vagy <code>wallpaper.jpg</code>-t látsz: régi URL-ből mentettél (a <code>ghostshell.pages.dev</code> halott, koponyás) → 6–7. pont újra a helyes URL-lel.</div>
 </div>
 
 <div class="step">
-<span class="step-number">9b.</span> <span class="arrow">→</span> <strong>Egyszeri, örök lépés (opcionális, de ajánlott):</strong> Steam <span class="arrow">→</span> Trove <span class="arrow">→</span> Properties <span class="arrow">→</span> Installed Files <span class="arrow">→</span> <strong>Move install folder…</strong> <span class="arrow">→</span> <code>I:\user\SteamShadow</code> — utána egyszer megismétled a 6–7. pontot az <code>I:\user\SteamShadow\steamapps\common\Trove\GlyphClient.exe</code> célúttal.
+<span class="step-number">9b.</span> <span class="arrow">→</span> <strong>Egyszeri, örök lépés (opcionális, de ajánlott):</strong> Steam <span class="arrow">→</span> <strong>Color Connect</strong> <span class="arrow">→</span> Properties <span class="arrow">→</span> Installed Files <span class="arrow">→</span> <strong>Move install folder…</strong> <span class="arrow">→</span> <code>I:\user\SteamShadow</code> — utána egyszer megismétled a 6–7. pontot az <code>I:\user\SteamShadow\steamapps\common\Color Connect\Color Connect.exe</code> célúttal.
 <div class="ok">Ettől kezdve a swap <strong>túléli a sessiont</strong> — legközelebb csak Play. A napló bizonyítja: <code>Swap persistence: PERMANENT</code>. Ha <code>SESSION-ONLY</code> áll, a játék a C:-n van (a GFN session-önként törli).</div>
 </div>
 
@@ -183,8 +192,8 @@ A verziószám nő, ahogy a build frissül — az URL nem változik.</div>
 <h2>🩺 Ha valami nem stimmel</h2>
 <table>
 <tr><th>Tünet</th><th>Ok</th><th>Megoldás</th></tr>
-<tr><td>„Path does not exist”</td><td>nincs telepítve a Trove ezen a VM-en</td><td>3. pont</td></tr>
-<tr><td>„semmi nem történik”, sima Trove indul</td><td>Steam Cloud BE maradt</td><td>4. pont</td></tr>
+<tr><td>„Path does not exist”</td><td>nincs telepítve a játék ezen a VM-en (vagy a Steam Cloud BE van kapcsolva)</td><td>3–4. pont</td></tr>
+<tr><td>„semmi nem történik”, sima Color Connect indul</td><td>Steam Cloud BE maradt, vagy rossz útvonalra mentettél</td><td>4. pont, 2. mező ellenőrzése</td></tr>
 <tr><td>koponyás háttér / nincs ikon</td><td>régi URL-ből mentett swap</td><td>6–7. pont, helyes URL</td></tr>
 <tr><td>Save As nem jön fel</td><td>nem a Steam-böngészőből nyitottad</td><td>5. pont (CEF-ből kell!)</td></tr>
 <tr><td><code>corrupt download</code> a naplóban</td><td>CDN-blokk (datacenter IP)</td><td>küldd a naplósort Barbarának</td></tr>
@@ -204,7 +213,7 @@ A verziószám nő, ahogy a build frissül — az URL nem változik.</div>
 <hr>
 
 <p style="color:#888; font-size:12px; margin-top:32px;">
-GhostShell metódus · build: <code>v7.44-2026.09.24</code> · élő content-length: <code>35178863</code> B<br>
+GhostShell metódus · build: <code>v7.45-2026.09.24</code> · élő content-length: <code>35179760</code> B<br>
 Forrás doksik: <code>docs/GFN-start.md</code> + <code>docs/GHOSTSHELL-STATE.md</code> · repók: <code>Camel993/ghostshell</code>, <code>Camel993/ghostshell-bin</code> (privát)
 </p>
 
@@ -246,8 +255,10 @@ document.querySelectorAll('.field').forEach(function (f) {
 });
 
 function copyPatch() {
-  var url = document.querySelectorAll('.field')[0].dataset.copy;
-  var dst = document.querySelectorAll('.field')[1].dataset.copy;
+  // PATCH = the download URL + the target path. Selected by ID, never by index:
+  // inserting a field in between must not silently swap what gets copied.
+  var url = document.getElementById('patchUrl').dataset.copy;
+  var dst = document.getElementById('patchPath').dataset.copy;
   var txt = url + '\n' + dst;
   doCopy(txt, null);
   document.querySelector('.copy-patch').textContent = '✓ PATCH copied (2 sor!)';
