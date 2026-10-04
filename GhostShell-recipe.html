@@ -95,6 +95,8 @@
 <div class="field" data-copy="%LOCALAPPDATA%\GhostShell\ghost.log">%LOCALAPPDATA%\GhostShell\ghost.log</div>
 <div class="label">Sessiont túlélő naplók (v7.35 — az utolsó 10 megmarad)</div>
 <div class="field" data-copy="I:\GhostShell\GhostShell Logs\">I:\GhostShell\GhostShell Logs\</div>
+<div class="label">Ha a fekete háttér mégis visszatérne: üres fájl ide (a session megtartja a sajátját)</div>
+<div class="field" data-copy="I:\GhostShell\no-wallpaper.flag">I:\GhostShell\no-wallpaper.flag</div>
 
 <h3>Visszavonás</h3>
 <div class="field" data-copy="GhostShell.exe --recover">GhostShell.exe --recover</div>
@@ -180,7 +182,7 @@ A verziószám nő, ahogy a build frissül — az URL nem változik.</div>
 <li>Ha a váltás „nem csinál semmit”: a napló minden kísérletet leír — <code>Switch [Alt+Tab via LL hook] / [Ctrl+Tab hotkey]: 'honnan' -&gt; 'hova' | foreground OK vagy FAILED</code>, illetve <code>NO candidate windows</code>. Ha egyáltalán nincs Switch-sor, a <strong>kliens nyeli el a gombot</strong> (kliens-oldali megoldás kell).</li>
 <li><strong>AutoHotkey appváltó (v7.42):</strong> a <code>ghost.log</code>-ban az <code>AHK: AutoHotkey v2 running ...</code> sor jelzi, hogy a váltó tényleg AHK-ban fut; a részletes naplója <code>I:\GhostShell\GhostShell Logs\ahk-hotkeys.log</code> (minden váltás + <code>poll telemetry</code> + 60 mp-enkénti heartbeat). Ha a naplóban nincs egyetlen váltás-sor sem gombnyomásra, akkor a gomb <strong>el sem ér a VM-ig</strong> — azt csak a GFN-kliens oldalán lehet orvosolni.</li>
 <li><strong>v7.43 — a diagnózis egy kattintás:</strong> a <strong>„GhostShell Hotkeys”</strong> asztali ikon fájlja egy <strong>LIVE STATUS</strong> blokkot is mutat: build-verzió, payload root, a <strong>háttérkép read-back</strong> eredménye (kiderül, ha a shell visszafestette), a hotkey-tulajdonlás, az AutoHotkey állapota, és mindkét napló utolsó 12 sora. A <code>Tab edge #n (Alt=… Ctrl=… Shift=…)</code> sor mondja meg, hogy a gomb eljut-e a VM-ig, és hogy a módosítóbillentyű rendben van-e.</li>
-<li><strong>v7.44 — a háttér fekete is marad:</strong> a Windows Spotlight / ContentDeliveryManager háttér-forgatása ki van kapcsolva (HKCU), a fekete háttérkép registry-ből is be van írva, és egy <strong>20 mp-enkénti őr az egész session alatt</strong> visszateszi a feketét, ha bárki (shell, push, reconnect) visszafestené. Az őr javításainak száma a LIVE STATUS blokkban látszik (<code>visszafestes-javitas: Nx</code>). Kikapcsolható: <code>no-wallpaper.flag</code> az <code>I:\GhostShell</code> gyökérben.</li>
+<li><strong>FEKETE HÁTTÉR — a legfontosabb, kétlépcsős:</strong> (1) a Windows Spotlight / ContentDeliveryManager háttér-forgatása ki van kapcsolva (HKCU), a fekete kép registry-ből is be van írva; (2) egy <strong>20 mp-enkénti őr az egész session alatt</strong> visszateszi a feketét, ha bárki (shell, push, reconnect) visszafestené. <strong>Ez csak élőben ellenőrzött sessionben bizonyított</strong> — a bizonyíték a „GhostShell Hotkeys” ikon LIVE STATUS blokkja, amit a read-back mond (<code>Wallpaper: set, read-back …wallpaper-v6.jpg</code> = jó). Ha mégis visszatérne a session saját háttere, a <strong>biztos megoldás</strong>: üres fájl <code>no-wallpaper.flag</code> néven az <code>I:\GhostShell</code> gyökérbe (lásd a copy-ready mezők között) — ekkor a session MEGTARTJA a saját fekete hátterét. Az őr javításainak száma: <code>visszafestes-javitas: Nx</code>.</li>
 </ul>
 
 <hr>
