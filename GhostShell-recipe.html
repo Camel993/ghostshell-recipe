@@ -155,6 +155,11 @@ A verziószám nő, ahogy a build frissül — az URL nem változik.</div>
 <div class="ok">Ettől kezdve a swap <strong>túléli a sessiont</strong> — legközelebb csak Play. A napló bizonyítja: <code>Swap persistence: PERMANENT</code>. Ha <code>SESSION-ONLY</code> áll, a játék a C:-n van (a GFN session-önként törli).</div>
 </div>
 
+<div class="step">
+<span class="step-number">9c.</span> <span class="arrow">→</span> <strong>A session LEZÁRÁSA — mindig a Start menü „Shutdown Session” pontjával</strong> (a „Session Ki” asztali ikon vagy a Start menü <code>Session Ki</code> pontja)
+<div class="note"><strong>Ez a legfontosabb szabály a videó szerint:</strong> a SalsaNOW splash figyelmeztető dialógusa szó szerint — <em>„Always close the session from the Windows Start menu button ’Shutdown Session’.”</em> Ha bezárod az ablakokat vagy a Steamet és nem ezt nyomod, a GFN nem tudja rendesen leválasztani a virtuális meghajtót, és a következő sessionben a <strong>tartós <code>I:\</code> sérülhet</strong> (ez a fájl- és játék-mentődés alapja). A <code>Session Ki</code> a salsa-féle <code>taskkill steam.exe</code>-t futtatja — a kioskon a <code>shutdown.exe</code> le van tiltva, ezért ez az egyetlen működő út. <strong>A „Shut Down/Restart PC” gombok a taskbar-on ne használd</strong> — nincs hozzájuk jog.</div>
+</div>
+
 <hr>
 
 <h2>⌨️ Billentyűkombók a sessionben (v7.42 — SalsaNOW-paritás, AutoHotkey appváltó)</h2>
@@ -197,6 +202,8 @@ A verziószám nő, ahogy a build frissül — az URL nem változik.</div>
 <tr><td>„semmi nem történik”, sima Color Connect indul</td><td>Steam Cloud BE maradt, vagy rossz útvonalra mentettél</td><td>4. pont, 2. mező ellenőrzése</td></tr>
 <tr><td>koponyás háttér / nincs ikon</td><td>régi URL-ből mentett swap</td><td>6–7. pont, helyes URL</td></tr>
 <tr><td>Save As nem jön fel</td><td>nem a Steam-böngészőből nyitottad</td><td>5. pont (CEF-ből kell!)</td></tr>
+<tr><td>a következő sessionben a <code>I:\</code> hiányzik / a játékok nem vannak meg</td><td>a session NEM a „Shutdown Session” ponton zárult le, így a tartós meghajtó nem csatlakozott vissza</td><td>9c. pont — mindig <code>Shutdown Session</code>; ha már sérült, a Steam telepítse újra a játékot az <code>I:\user\SteamShadow</code>-ba</td></tr>
+<tr><td>a session vége „begyűrűz”, minden lassú</td><td>a Steam a háttérben bent maradt, a GFN nem tudta lekapcsolni</td><td>9c. pont (<code>Session Ki</code> = <code>taskkill steam.exe</code>)</td></tr>
 <tr><td><code>corrupt download</code> a naplóban</td><td>CDN-blokk (datacenter IP)</td><td>küldd a naplósort Barbarának</td></tr>
 <tr><td>bizonytalan vagy</td><td>—</td><td><code>I:\GhostShell\GhostShell Logs\</code> → az utolsó napló kell ide</td></tr>
 </table>
