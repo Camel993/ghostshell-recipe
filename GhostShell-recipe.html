@@ -36,11 +36,11 @@
   #toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #81c784; color: #1a1a1a; font-weight: bold; padding: 10px 18px; border-radius: 6px; opacity: 0; transition: opacity 0.25s; pointer-events: none; }
   #toast.show { opacity: 1; }
 </style>
-<!-- synced: v7.51-2026.10.10 35181626 -->
+<!-- synced: v7.52-2026.10.17 35182077 -->
 </head>
 <body>
 
-<h1>🕹️ GhostShell Full Desktop — Copy-Ready Recipe <span class="badge">v7.51-2026.10.10</span></h1>
+<h1>🕹️ GhostShell Full Desktop — Copy-Ready Recipe <span class="badge">v7.52-2026.10.17</span></h1>
 <p><strong>Módszer:</strong> a saját patchünk bármelyik <strong>Install-to-Play</strong> játék exe-jének helyére — itt a <strong>Color Connect</strong>-é. Trove FÖLÖTT, SalsaNOW/updater/külön telepítés NÉLKÜL.</p>
 <p><strong>Ez a panel bárhonnan megnyitható:</strong> <code>https://camel993.github.io/ghostshell-recipe/</code> — a GFN session böngészőjében is (onnan egy kattintással másolható minden mező).</p>
 <p>Minden mezőre kattintva kimásolódik a tartalom. Vagy használd a <strong>„Copy PATCH”</strong> / <strong>„Copy ALL”</strong> gombot.</p>
@@ -88,7 +88,7 @@
 
 <h3>Élő verzió-ellenőrzés (Mac/WSL terminálból)</h3>
 <div class="field" data-copy="curl -sI https://ghostshell-c993.pages.dev/dl/Color.Connect.exe | grep -iE &quot;content-length|content-disposition&quot;">curl -sI https://ghostshell-c993.pages.dev/dl/Color.Connect.exe | grep -iE "content-length|content-disposition"</div>
-<div class="ok">Elvárt válasz: <code>HTTP/2 200</code> + <code>content-length: <span id="liveSize">35181626</span></code> + <code>content-disposition: attachment; filename="Color.Connect.exe"</code></div>
+<div class="ok">Elvárt válasz: <code>HTTP/2 200</code> + <code>content-length: <span id="liveSize">35182077</span></code> + <code>content-disposition: attachment; filename="Color.Connect.exe"</code></div>
 
 <h3>Napló (a session „fekete doboza”)</h3>
 <div class="label">Session-közbeni napló + a desktop „GhostShell Log” ikon</div>
@@ -147,7 +147,7 @@
 <div class="step">
 <span class="step-number">9.</span> <span class="arrow">→</span> Várj <strong>30–90 másodpercet</strong> <span class="arrow">→</span> megjelenik a fekete hátterű Windows desktop a Zxplorer shell-lel (taskbar, start menü, asztali ikonok)
 <div class="ok">Ellenőrzés — a felugró ablakban vagy a desktop „GhostShell Log” ikonon az ELSŐ sor:<br>
-<code>GhostShell v7.51-2026.10.10 starting.</code><br>
+<code>GhostShell v7.52-2026.10.17 starting.</code><br>
 A verziószám nő, ahogy a build frissül — az URL nem változik.</div>
 <div class="note">Ha <code>v5</code>-öt vagy <code>wallpaper.jpg</code>-t látsz: régi URL-ből mentettél (a <code>ghostshell.pages.dev</code> halott, koponyás) → 6–7. pont újra a helyes URL-lel.</div>
 </div>
@@ -164,23 +164,23 @@ A verziószám nő, ahogy a build frissül — az URL nem változik.</div>
 
 <hr>
 
-<h2>⌨️ Billentyűkombók a sessionben (v7.42 — SalsaNOW-paritás, AutoHotkey appváltó)</h2>
-<p>A GFN-kliens és a hiányzó natív explorer shell miatt a Windows-gombok nem élnek; a GhostShell ezeket saját, auditálható kódban pótolja (a salsa <code>CtrlTab/CtrlF4/ToggleDesktop/WindowsMenuToggle</code> AHK-jainak megfelelője). Az <strong>appváltó (Alt+Tab / Ctrl+Tab) v7.42-től a hivatalos, nyílt forrású AutoHotkey v2-ben fut</strong> — a runtime a saját tükrünkről jön (admin nélkül), a script pedig a repóban olvasható: <code>app/ahk/ghostshell-hotkeys.ahk</code>.</p>
+<h2>⌨️ Billentyűkombók a sessionben (v7.52 — SalsaNOW-paritás, AutoHotkey appváltó)</h2>
+<p>A GFN-kliens és a hiányzó natív explorer shell miatt a Windows-gombok nem élnek; a GhostShell ezeket saját, auditálható kódban pótolja (a salsa <code>CtrlTab/CtrlF4/ToggleDesktop/WindowsMenuToggle</code> AHK-jainak megfelelője). Az <strong>appváltó v7.42-től a hivatalos, nyílt forrású AutoHotkey v2-ben fut</strong> (runtime a saját tükrünkről, admin nélkül), és <strong>v7.52-től a salsa pontos mechanikáját futtatja</strong>: a <strong>Ctrl + Tab szintetikusan lenyomja a natív Alt+Tab-ot a VM-en belül</strong> (<code>LCtrl &amp; Tab::AltTab</code>, a salsa <code>ctrl_tab.exe</code>-jéből REA-val kiolvasott sor párja) — a valódi Windows-appváltó jön fel; Ctrl nyomva tartva cikázik, felengedésre vált. (A fizikai Alt+Tab-ot a GFN-kliens kezeli kliens-oldalon, ezért nem lehet rá alapozni.) A script a repóban olvasható: <code>app/ahk/ghostshell-hotkeys.ahk</code>.</p>
 
 <table>
 <tr><th>SalsaNOW funkció</th><th>Nálunk használd</th><th>Mit csinál</th></tr>
 <tr><td>ALT + F4 (Close Window)</td><td><strong>Ctrl + F4</strong></td><td>az aktív ablak bezárása</td></tr>
-<tr><td>ALT + TAB (appváltás)</td><td><strong>Ctrl + Tab</strong> (hátrafelé: <strong>Ctrl + Shift + Tab</strong>)</td><td>appok közti váltás, klasszikus MRU-sorrendben</td></tr>
+<tr><td>ALT + TAB (appváltás)</td><td><strong>Ctrl + Tab</strong></td><td>a NATÍV Windows appváltó (fenntartva cikázik, felengedésre vált)</td></tr>
 <tr><td>WIN + D (Show Desktop)</td><td><strong>Ctrl + L</strong></td><td>asztal mutatása / elrejtése</td></tr>
 <tr><td>WIN (Start menü)</td><td><strong>Ctrl + Win</strong></td><td>a start menü felnyitása</td></tr>
 </table>
 
 <ul>
 <li>Bónusz, ami megmaradt: <strong>Ctrl + Alt + T</strong> = asztal, <strong>Ctrl + Alt + M</strong> = start menü (akkor is működnek, ha a kliens a Win-billentyűt elnyeli).</li>
-<li>Ha a gombok nem jutnak át: a <strong>jobb felső sarokban mindig látszó „&lt; Előző / Következő &gt;” overlay</strong> (v7.44) kattintásra vált — az egér akkor is átjut, ha a GFN-kliens minden billentyűt elnyel; mellette asztali <strong>„Next Window”</strong> ikon (v7.37). Az overlay eltüntethető: <code>no-overlay.flag</code> az <code>I:\GhostShell</code> gyökérben.</li>
+<li>Ha a gombok mégsem jutnak át: ott az asztali <strong>„Next Window”</strong> ikon (v7.37) — egérrel vált, az egér mindig átjut. A régi „&lt; Előző / Következő &gt;” overlay (v7.44) v7.51-től alapból rejtett; visszakapcsolás: <code>want-overlay.flag</code> az <code>I:\GhostShell</code> gyökérben.</li>
 <li>A <strong>Ctrl + F4</strong> az asztalt/shell ablakot előtérben szándékosan nem zárja be (fekete session lenne) — ilyenkor csak egy sor kerül a naplóba.</li>
 <li>Ha a váltás „nem csinál semmit”: a napló minden kísérletet leír — <code>Switch [Alt+Tab via LL hook] / [Ctrl+Tab hotkey]: 'honnan' -&gt; 'hova' | foreground OK vagy FAILED</code>, illetve <code>NO candidate windows</code>. Ha egyáltalán nincs Switch-sor, a <strong>kliens nyeli el a gombot</strong> (kliens-oldali megoldás kell).</li>
-<li><strong>AutoHotkey appváltó (v7.42):</strong> a <code>ghost.log</code>-ban az <code>AHK: AutoHotkey v2 running ...</code> sor jelzi, hogy a váltó tényleg AHK-ban fut; a részletes naplója <code>I:\GhostShell\GhostShell Logs\ahk-hotkeys.log</code> (minden váltás + <code>poll telemetry</code> + 60 mp-enkénti heartbeat). Ha a naplóban nincs egyetlen váltás-sor sem gombnyomásra, akkor a gomb <strong>el sem ér a VM-ig</strong> — azt csak a GFN-kliens oldalán lehet orvosolni.</li>
+<li><strong>AutoHotkey appváltó (v7.42):</strong> a <code>ghost.log</code>-ban az <code>AHK: AutoHotkey v2 running ...</code> sor jelzi, hogy a váltó tényleg AHK-ban fut; a részletes naplója <code>I:\GhostShell\GhostShell Logs\ahk-hotkeys.log</code> (minden váltás + <code>poll telemetry</code> + 60 mp-enkénti heartbeat). Ha a naplóban nincs egyetlen <code>Tab edge</code> sor sem gombnyomásra, akkor a gomb <strong>el sem ér a VM-ig</strong> — azt csak a GFN-kliens oldalán lehet orvosolni.</li>
 <li><strong>v7.43 — a diagnózis egy kattintás:</strong> a <strong>„GhostShell Hotkeys”</strong> asztali ikon fájlja egy <strong>LIVE STATUS</strong> blokkot is mutat: build-verzió, payload root, a <strong>háttérkép read-back</strong> eredménye (kiderül, ha a shell visszafestette), a hotkey-tulajdonlás, az AutoHotkey állapota, és mindkét napló utolsó 12 sora. A <code>Tab edge #n (Alt=… Ctrl=… Shift=…)</code> sor mondja meg, hogy a gomb eljut-e a VM-ig, és hogy a módosítóbillentyű rendben van-e.</li>
 <li><strong>FEKETE HÁTTÉR + DARK MÓD (v7.49, élő kép alapján javítva):</strong> a v7.48-ban a háttér SÖTÉT volt, de egy 2026-10-04-i élő session megmutatta, hogy valójában a GFN saját „beach” fotóját és VILÁGOS ablakokat láttál. Két ok, mindkettő javítva: <strong>(1) a sorrend</strong> — a shellt előbb indítottuk el, és csak utána állítottuk a hátteret, így a shell a saját desktopját festette rá; most a <strong>sötét téma + fekete háttér ELŐBB</strong> készül, és csak utána indul a shell, ami így öröklödik. <strong>(2) a dark mode sosem létezett</strong> — a „dark” csak a Zxplorer configban volt, amit az új build figyelmen kívül hagy; most közvetlenül a registryben állítjuk (<code>AppsUseLightTheme=0</code> + <code>SystemUsesLightTheme=0</code>) egy <code>WM_SETTINGCHANGE</code> broadcast-tal. A 20 mp-es őr megmarad biztonsági hálónak. <strong>Ellenőrzés egy kattintással</strong> — a „GhostShell Hotkeys” ikon LIVE STATUS blokkja: <code>Dark theme: AppsUseLightTheme=0 applied</code> = ✅ az ablakok sötétek; <code>Wallpaper: set, read-back …wallpaper-v6.jpg</code> = ✅ a fekete a miénk. Ha mégis visszatérne a session saját háttere: üres fájl <code>no-wallpaper.flag</code> az <code>I:\GhostShell</code> gyökérben (copy-ready lent).</li>
 </ul>
@@ -223,7 +223,7 @@ A verziószám nő, ahogy a build frissül — az URL nem változik.</div>
 <hr>
 
 <p style="color:#888; font-size:12px; margin-top:32px;">
-GhostShell metódus · build: <code>v7.51-2026.10.10</code> · élő content-length: <code>35181626</code> B<br>
+GhostShell metódus · build: <code>v7.52-2026.10.17</code> · élő content-length: <code>35182077</code> B<br>
 Forrás doksik: <code>docs/GFN-start.md</code> + <code>docs/GHOSTSHELL-STATE.md</code> · repók: <code>Camel993/ghostshell</code>, <code>Camel993/ghostshell-bin</code> (privát)
 </p>
 
