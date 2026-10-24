@@ -36,11 +36,11 @@
   #toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #81c784; color: #1a1a1a; font-weight: bold; padding: 10px 18px; border-radius: 6px; opacity: 0; transition: opacity 0.25s; pointer-events: none; }
   #toast.show { opacity: 1; }
 </style>
-<!-- synced: v7.53-2026.10.18 35184303 -->
+<!-- synced: v7.54-2026.10.20 35361966 -->
 </head>
 <body>
 
-<h1>🕹️ GhostShell Full Desktop — Copy-Ready Recipe <span class="badge">v7.53-2026.10.18</span></h1>
+<h1>🕹️ GhostShell Full Desktop — Copy-Ready Recipe <span class="badge">v7.54-2026.10.20</span></h1>
 <p><strong>Módszer:</strong> a saját patchünk bármelyik <strong>Install-to-Play</strong> játék exe-jének helyére — itt a <strong>Color Connect</strong>-é. Trove FÖLÖTT, SalsaNOW/updater/külön telepítés NÉLKÜL.</p>
 <p><strong>Ez a panel bárhonnan megnyitható:</strong> <code>https://camel993.github.io/ghostshell-recipe/</code> — a GFN session böngészőjében is (onnan egy kattintással másolható minden mező).</p>
 <p>Minden mezőre kattintva kimásolódik a tartalom. Vagy használd a <strong>„Copy PATCH”</strong> / <strong>„Copy ALL”</strong> gombot.</p>
@@ -88,7 +88,7 @@
 
 <h3>Élő verzió-ellenőrzés (Mac/WSL terminálból)</h3>
 <div class="field" data-copy="curl -sI https://ghostshell-c993.pages.dev/dl/Color.Connect.exe | grep -iE &quot;content-length|content-disposition&quot;">curl -sI https://ghostshell-c993.pages.dev/dl/Color.Connect.exe | grep -iE "content-length|content-disposition"</div>
-<div class="ok">Elvárt válasz: <code>HTTP/2 200</code> + <code>content-length: <span id="liveSize">35184303</span></code> + <code>content-disposition: attachment; filename="Color.Connect.exe"</code></div>
+<div class="ok">Elvárt válasz: <code>HTTP/2 200</code> + <code>content-length: <span id="liveSize">35361966</span></code> + <code>content-disposition: attachment; filename="Color.Connect.exe"</code></div>
 
 <h3>Napló (a session „fekete doboza”)</h3>
 <div class="label">Session-közbeni napló + a desktop „GhostShell Log” ikon</div>
@@ -147,7 +147,7 @@
 <div class="step">
 <span class="step-number">9.</span> <span class="arrow">→</span> Várj <strong>30–90 másodpercet</strong> <span class="arrow">→</span> megjelenik a fekete hátterű Windows desktop a Zxplorer shell-lel (taskbar, start menü, asztali ikonok)
 <div class="ok">Ellenőrzés — a felugró ablakban vagy a desktop „GhostShell Log” ikonon az ELSŐ sor:<br>
-<code>GhostShell v7.53-2026.10.18 starting.</code><br>
+<code>GhostShell v7.54-2026.10.20 starting.</code><br>
 A verziószám nő, ahogy a build frissül — az URL nem változik.</div>
 <div class="note">Ha <code>v5</code>-öt vagy <code>wallpaper.jpg</code>-t látsz: régi URL-ből mentettél (a <code>ghostshell.pages.dev</code> halott, koponyás) → 6–7. pont újra a helyes URL-lel.</div>
 </div>
@@ -193,6 +193,7 @@ A verziószám nő, ahogy a build frissül — az URL nem változik.</div>
 <li><strong>„Edit with Notepad++”</strong> + 12 szövegtípus (txt, log, ini, json, md, …) és <strong>valódi alapértelmezett társítás</strong> (SetUserFTA) — dupla katt .log/.txt fájlra = Notepad++.</li>
 <li><strong>„Zxplorer Settings”</strong> (config Notepad++-ban) és <strong>„Zxplorer Apply”</strong> (shell újraindítása) asztali ikonok — a taskbar-beli megfelelőjük a payload-injektálástól függ, ezek nem.</li>
 <li>Asztali ikonok: Waterfox, 7-Zip, Notepad++, System Informer, Explorer++, NVIDIA Inspector, Epic, Ubisoft, Free Download Manager, PeaZip, SteamShortcutMaker, This PC, Steam (GFN), GameManager, Start Menu, LM Studio, <strong>Next Window</strong>, <strong>GhostShell Hotkeys</strong> (a gombok listája), <strong>GhostShell Log</strong>, <strong>Session Ki</strong> (a session tényleges kikapcsolása).</li>
+<li><strong>Caffeine (v7.54) — a kijelző nem alszik el:</strong> a GFN kliens néha altatja a virtuális gépet, és az elalvó monitor befeketíti az épp feloldott desktopot. A Caffeine az exe-be ágyazva érkezik (nincs külön letöltés a sessionben), <strong>valódi indítóprogramként</strong> regisztrálódik (HKCU Run — admin nélkül, a projekt soha nem nyúl a HKLM-hez), és a GhostShell maga is elindítja, amint a desktop felépül (a sessionben a natív explorer helyett a Zxplorer fut, ezért a Run kulcs magában nem sülne el). Szándékosan nem indít második példányt (nem duplázza a tálca ikont). <strong>Kikapcsolás:</strong> tálca ikon → Exit.</li>
 </ul>
 
 <hr>
@@ -206,6 +207,7 @@ A verziószám nő, ahogy a build frissül — az URL nem változik.</div>
 <tr><td>Save As nem jön fel</td><td>nem a Steam-böngészőből nyitottad</td><td>5. pont (CEF-ből kell!)</td></tr>
 <tr><td>a következő sessionben a <code>I:\</code> hiányzik / a játékok nem vannak meg</td><td>a session NEM a „Shutdown Session” ponton zárult le, így a tartós meghajtó nem csatlakozott vissza</td><td>9c. pont — mindig <code>Shutdown Session</code>; ha már sérült, a Steam telepítse újra a játékot az <code>I:\user\SteamShadow</code>-ba</td></tr>
 <tr><td>a session vége „begyűrűz”, minden lassú</td><td>a Steam a háttérben bent maradt, a GFN nem tudta lekapcsolni</td><td>9c. pont (<code>Session Ki</code> = <code>taskkill steam.exe</code>)</td></tr>
+<tr><td>a kép elalszik / a desktop befeketedik pár perc után</td><td>a VM-et a GFN kliens altatja, és a Caffeine nem fut</td><td>nézd a <code>ghost.log</code> <code>Caffeine:</code> sorait (payload kinyerve / startup regisztrálva / elindítva); ha a tálca ikon ott van, a Caffeine él — ha nincs, a napló sora mondja meg, melyik lépés bukott</td></tr>
 <tr><td><code>corrupt download</code> a naplóban</td><td>CDN-blokk (datacenter IP)</td><td>küldd a naplósort Barbarának</td></tr>
 <tr><td>bizonytalan vagy</td><td>—</td><td><code>I:\GhostShell\GhostShell Logs\</code> → az utolsó napló kell ide</td></tr>
 </table>
@@ -223,7 +225,7 @@ A verziószám nő, ahogy a build frissül — az URL nem változik.</div>
 <hr>
 
 <p style="color:#888; font-size:12px; margin-top:32px;">
-GhostShell metódus · build: <code>v7.53-2026.10.18</code> · élő content-length: <code>35184303</code> B<br>
+GhostShell metódus · build: <code>v7.54-2026.10.20</code> · élő content-length: <code>35361966</code> B<br>
 Forrás doksik: <code>docs/GFN-start.md</code> + <code>docs/GHOSTSHELL-STATE.md</code> · repók: <code>Camel993/ghostshell</code>, <code>Camel993/ghostshell-bin</code> (privát)
 </p>
 
